@@ -2,9 +2,9 @@ import { fetchWithAuth } from '../config'
 import { IUser, IUserUpdateDto } from './types'
 
 export const getProfile = () => {
-  return fetchWithAuth.get('users/profile').json<IUser>()
+  return fetchWithAuth.get<IUser>('users/profile')
 }
 
 export const updateProfile = (dto: IUserUpdateDto) => {
-  return fetchWithAuth.put('users/profile', { json: dto }).json<IUser>()
+  return fetchWithAuth.put<IUser>('users/profile', { json: dto })
 }

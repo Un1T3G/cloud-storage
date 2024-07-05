@@ -2,7 +2,7 @@ import { Layout } from 'pages/layout'
 import { NextPageWithLayout } from 'shared/types'
 
 export const NotificationsPage: NextPageWithLayout = () => {
-  return <></>
+  return <>TODO: Make file request permission</>
 }
 
 NotificationsPage.getLayout = (page) => (

@@ -1,9 +1,11 @@
+import { FileEntity } from 'src/files/entities/file.entity'
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm'
 
 @Entity({ name: 'users' })
@@ -25,4 +27,7 @@ export class UserEntity {
 
   @UpdateDateColumn()
   updatedAt: Date
+
+  @OneToMany(() => FileEntity, (file) => file.user)
+  files: FileEntity[]
 }

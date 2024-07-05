@@ -1,37 +1,56 @@
-import ky from 'ky'
-import { getAccessToken, getRefreshToken } from './lib'
-import { getTokens } from './auth'
+import axios from 'axios'
 
-export const fetchClassic = ky.create({
+import { auth, errorCatch, tokenService } from '.'
+
+const options = {
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers':
       'Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version',
     'Content-Type': 'application/json',
   },
-  prefixUrl: `${process.env.SERVER_URL}/api/`,
+  baseURL: `${process.env.SERVER_URL}/api/`,
+}
+
+export const fetchClassic = axios.create(options)
+
+export const fetchWithAuth = axios.create(options)
+
+fetchWithAuth.interceptors.request.use((config) => {
+  const accessToken = tokenService.getAccessToken()
+
+  if (config.headers && accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
+  }
+
+  return config
 })
 
-export const fetchWithAuth = fetchClassic.extend({
-  hooks: {
-    beforeRequest: [
-      (request) => {
-        const token = getAccessToken()
-        request.headers.set('Authorization', `Bearer ${token}`)
-      },
-    ],
-    afterResponse: [
-      async (input, options, response) => {
-        const refreshToken = getRefreshToken()
+fetchWithAuth.interceptors.response.use(
+  (config) => config,
+  async (error) => {
+    const originalRequest = error.config
 
-        if (response.status === 403 && refreshToken) {
-          const { accessToken } = await getTokens(refreshToken)
+    if (
+      (error.response.status === 401 ||
+        errorCatch(error) === 'jwt expired' ||
+        errorCatch(error) === 'jwt must be provided') &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true
+      try {
+        const refreshToken = tokenService.getRefreshToken()!
+        await auth.getTokens(refreshToken)
 
-          input.headers.set('Authorization', `Bearer ${accessToken}`)
-
-          return ky(input, options)
+        return fetchWithAuth.request(originalRequest)
+      } catch (e: any) {
+        if (e.response && errorCatch(e) === 'jwt expired') {
+          tokenService.removeTokensFromStorage()
         }
-      },
-    ],
-  },
-})
+      }
+    }
+
+    throw error
+  }
+)

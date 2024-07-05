@@ -4,6 +4,7 @@ import { CacheProvider } from './cache'
 import { ThemeProvider } from './theme'
 import { ReactQueryProvider } from './react-query'
 import { SessionStoreProvider } from 'entities/session'
+import { ToastProvider } from './toast'
 
 export const Providers = ({
   children,
@@ -13,7 +14,9 @@ export const Providers = ({
     <ReactQueryProvider>
       <SessionStoreProvider>
         <CacheProvider pageProps={pageProps}>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </ThemeProvider>
         </CacheProvider>
       </SessionStoreProvider>
     </ReactQueryProvider>

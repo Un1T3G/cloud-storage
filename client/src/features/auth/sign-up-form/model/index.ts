@@ -1,6 +1,8 @@
 import { useSignUpMutation } from 'entities/session'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
+import { errorCatch, tokenService } from 'shared/api'
 import * as yup from 'yup'
 
 const initialValues = {
@@ -33,8 +35,12 @@ export const useSignUpForm = () => {
   const router = useRouter()
 
   const { mutate } = useSignUpMutation({
-    onError: (error) => console.log('Sign-up error', error),
-    onSuccess: () => router.push('/'),
+    onError: (error) => toast.error(errorCatch(error)),
+    onSuccess: ({ data }) => {
+      tokenService.saveTokensToStorage(data.tokens)
+      router.push('/')
+      toast('Sign up successfully')
+    },
   })
 
   const formik = useFormik({

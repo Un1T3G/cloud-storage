@@ -2,7 +2,7 @@ import { IconButton, Stack, styled } from '@mui/joy'
 import { HEADER_HEIGHT } from '../constants'
 import { IoNotifications } from 'react-icons/io5'
 import { useRouter } from 'next/router'
-import { useUser } from 'entities/session'
+
 import { AvatarWithMenu } from './avatar-menu'
 
 interface IProps {
@@ -15,8 +15,6 @@ export const Header = ({ title }: IProps) => {
   const goToPermissionsPage = () => {
     router.push('/permissions')
   }
-
-  const user = useUser()
 
   return (
     <Root>

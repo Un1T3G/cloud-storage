@@ -1,5 +1,4 @@
 import { fetchClassic } from '../config'
-import { saveTokensToStorage } from '../lib'
 
 import {
   IAuthResponse,
@@ -8,45 +7,16 @@ import {
   IAuthTokensResponse,
 } from './types'
 
-const writeTokensToStorage = async (_: any, __: any, response: Response) => {
-  const { tokens } = (await response.clone().json()) as IAuthResponse
-
-  saveTokensToStorage(tokens)
-
-  return response
-}
-
 export const signIn = (dto: IAuthSignInDto) => {
-  return fetchClassic
-    .post('auth/sign-in', {
-      json: dto,
-      hooks: {
-        afterResponse: [writeTokensToStorage],
-      },
-    })
-    .json<IAuthResponse>()
+  return fetchClassic.post<IAuthResponse>('auth/sign-in', dto)
 }
 
 export const getTokens = (refreshToken: string) => {
-  return fetchClassic
-    .post('auth/refresh-token', {
-      json: {
-        refreshToken,
-      },
-      hooks: {
-        afterResponse: [writeTokensToStorage],
-      },
-    })
-    .json<IAuthTokensResponse>()
+  return fetchClassic.post<IAuthTokensResponse>('auth/refresh-token', {
+    refreshToken,
+  })
 }
 
 export const signUp = (dto: IAuthSignUpDto) => {
-  return fetchClassic
-    .post('auth/sign-up', {
-      json: dto,
-      hooks: {
-        afterResponse: [writeTokensToStorage],
-      },
-    })
-    .json<IAuthResponse>()
+  return fetchClassic.post<IAuthResponse>('auth/sign-up', dto)
 }
