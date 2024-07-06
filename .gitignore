@@ -1,7 +1,10 @@
+.vscode/
+
 #server
 server/node_modules
-server/dist
-server/uploads
+server/dist/
+server/uploads/
+server/.vercel/
 
 #client
 client/node_modules

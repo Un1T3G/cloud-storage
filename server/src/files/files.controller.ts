@@ -14,8 +14,8 @@ import { FilesService } from './files.service'
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { fileStorage } from './storage'
-import { User } from 'src/users/decorators/user.decorator'
-import { Auth } from 'src/auth/decorators/auth.decorator'
+import { User } from '../users/decorators/user.decorator'
+import { Auth } from '../auth/decorators/auth.decorator'
 import { FileType } from './entities/file.entity'
 
 @ApiTags('files')

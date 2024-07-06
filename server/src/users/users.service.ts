@@ -17,14 +17,6 @@ export class UsersService {
     private readonly userRepository: Repository<UserEntity>
   ) {}
 
-  private async checkHasByEmailAndUsername(dto: {
-    email: string
-    username: string
-  }) {
-    await this.getByEmail(dto.email)
-    await this.getByUsername(dto.username)
-  }
-
   async getById(id: number) {
     const user = await this.userRepository.findOneBy({ id })
 

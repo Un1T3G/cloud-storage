@@ -1,4 +1,4 @@
-import { FileEntity } from 'src/files/entities/file.entity'
+import { FileEntity } from '../../files/entities/file.entity'
 import {
   Column,
   Entity,
