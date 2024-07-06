@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { REFRESH_TOKEN_KEY } from 'shared/api'
+import { REFRESH_TOKEN_KEY } from './src/shared/api'
 
 const redirectToAuth = (request: NextRequest) => {
   return NextResponse.redirect(new URL('/auth/sign-in', request.url))
