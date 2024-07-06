@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common'
-import { UsersModule } from './users/users.module'
-import { AuthModule } from './auth/auth.module'
+
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserEntity } from './users/entities/user.entity'
-import { FilesModule } from './files/files.module'
+
 import { FileEntity } from './files/entities/file.entity'
+import { AuthModule } from './auth/auth.module'
+import { UsersModule } from './users/users.module'
+import { FilesModule } from './files/files.module'
 
 @Module({
   imports: [

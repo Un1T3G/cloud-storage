@@ -24,7 +24,6 @@ import { FileType } from './entities/file.entity'
 @Controller('files')
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
-
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -54,12 +53,10 @@ export class FilesController {
   ) {
     return this.filesService.create(file, userId)
   }
-
   @Get()
   findAll(@User('id') userId: number, @Query('type') fileType: FileType) {
     return this.filesService.findAll(userId, fileType)
   }
-
   @Delete()
   remove(@User('id') userId: number, @Query('ids') ids: string) {
     return this.filesService.remove(userId, ids)
