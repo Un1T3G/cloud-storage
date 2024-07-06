@@ -1,6 +1,7 @@
 #server
 server/node_modules
 server/dist
+server/uploads
 
 #client
 client/node_modules

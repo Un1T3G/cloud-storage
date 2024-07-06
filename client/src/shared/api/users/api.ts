@@ -6,5 +6,5 @@ export const getProfile = () => {
 }
 
 export const updateProfile = (dto: IUserUpdateDto) => {
-  return fetchWithAuth.put<IUser>('users/profile', { json: dto })
+  return fetchWithAuth.put<IUser>('users/profile', dto)
 }
