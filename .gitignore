@@ -1,4 +1,5 @@
 .vscode/
+.env
 
 #server
 server/node_modules
