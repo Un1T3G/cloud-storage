@@ -5,9 +5,9 @@ Stay organized and access your data anytime, anywhere.
 
 ### Screenshot
 
-![Screenshot](./screenshots/screenshot1.png)
-![Screenshot](./screenshots/screenshot2.png)
-![Screenshot](./screenshots/screenshot3.png)
+![Screenshot](./screenshots/screenshot_01.png)
+![Screenshot](./screenshots/screenshot_02.png)
+![Screenshot](./screenshots/screenshot_03.png)
 
 ### Used technologies
 
