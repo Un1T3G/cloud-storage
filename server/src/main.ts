@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { AppModule } from './app.module'
 import * as express from 'express'
+import * as cors from 'cors'
 import { join } from 'path'
 
 require('dotenv').config()
@@ -9,16 +10,16 @@ require('dotenv').config()
 const PORT = process.env.SERVER_PORT || 7000
 
 async function bootstrap() {
-  const app = await await NestFactory.create(AppModule, {
-    cors: {
+  const app = await await NestFactory.create(AppModule)
+
+  app.setGlobalPrefix('api')
+  app.use(
+    (cors as (options: cors.CorsOptions) => express.RequestHandler)({
       origin: '*',
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    },
-  })
-
-  app.setGlobalPrefix('api')
-
+    })
+  )
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')))
 
   const config = new DocumentBuilder()
@@ -28,7 +29,6 @@ async function bootstrap() {
     .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('swagger', app, document, {
-    customSiteTitle: 'Backend Generator',
     customfavIcon: 'https://avatars.githubusercontent.com/u/6936373?s=200&v=4',
     customJs: [
       'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.min.js',
