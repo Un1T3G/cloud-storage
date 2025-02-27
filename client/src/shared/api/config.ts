@@ -6,7 +6,7 @@ const options = {
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers':
-      'Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
     'Content-Type': 'application/json',
   },
   baseURL: `${process.env.SERVER_URL}/api/`,

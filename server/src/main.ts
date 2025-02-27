@@ -1,9 +1,8 @@
 import { NestFactory } from '@nestjs/core'
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import { AppModule } from './app.module'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import * as express from 'express'
-import * as cors from 'cors'
 import { join } from 'path'
+import { AppModule } from './app.module'
 
 require('dotenv').config()
 
@@ -13,13 +12,16 @@ async function bootstrap() {
   const app = await await NestFactory.create(AppModule)
 
   app.setGlobalPrefix('api')
-  app.use(
-    (cors as (options: cors.CorsOptions) => express.RequestHandler)({
-      origin: '*',
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    })
-  )
+  // app.use(
+  //   (cors as (options: cors.CorsOptions) => express.RequestHandler)({
+  //     origin: '*',
+  //     credentials: true,
+  //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  //   })
+  // )
+  app.enableCors({
+    origin: '*',
+  })
   app.use('/uploads', express.static(join(__dirname, '..', 'uploads')))
 
   const config = new DocumentBuilder()

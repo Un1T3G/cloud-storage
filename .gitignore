@@ -6,9 +6,11 @@ server/node_modules
 server/dist/
 server/uploads/
 server/.vercel/
+server/.env
 
 #client
 client/node_modules
 client/.next/
 client/out/
 client/build/
+client/.env
