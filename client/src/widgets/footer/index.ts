@@ -1,2 +1,2 @@
-export * from './ui'
-export * from './constants'
+export * from './footer.constants'
+export * from './footer.ui'

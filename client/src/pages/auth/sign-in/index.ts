@@ -1,1 +1,1 @@
-export * from './ui'
+export * from './auth.sign-in.page.ui'

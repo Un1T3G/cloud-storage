@@ -1,1 +1,2 @@
-export * from './api'
+export * from './users.api'
+export * from './users.types'

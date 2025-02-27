@@ -1,9 +1,9 @@
-import { Providers } from './providers'
+import { Providers } from './providers/'
 
-import { NoSSR } from 'shared/lib'
-import './styles/index.css'
-import { AppPropsWithLayout } from 'shared/types'
 import { NextSeo } from 'next-seo'
+import { NoSSR } from 'shared/lib'
+import { AppPropsWithLayout } from 'shared/types'
+import './styles/index.css'
 
 export const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page)
@@ -11,7 +11,7 @@ export const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <>
       <NextSeo nofollow noindex title="Cloud storage" />
-      <Providers pageProps={pageProps}>
+      <Providers>
         <NoSSR>{getLayout(<Component {...pageProps} />)}</NoSSR>
       </Providers>
     </>

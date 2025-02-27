@@ -1,1 +1,1 @@
-export * from './ui'
+export * from './notifications.page.ui'

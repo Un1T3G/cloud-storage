@@ -1,3 +1,4 @@
-export * from './queries'
-export * from './lib'
+export * from './files.lib'
+export * from './files.model'
+export * from './files.queries'
 export * from './ui'

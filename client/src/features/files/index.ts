@@ -1,2 +1,2 @@
-export * from './upload'
-export * from './delete'
+export * from './file.delete'
+export * from './file.upload'

@@ -1,1 +1,1 @@
-export { SignUpPage as default } from 'pages/auth'
+export { AuthSignUpPage as default } from 'pages/auth'
