@@ -11,5 +11,5 @@ Stay organized and access your data anytime, anywhere.
 
 ### Used technologies
 
-- NextJS for server
-- NestJS for client
+- NestJS for backend
+- NextJS for frontend
